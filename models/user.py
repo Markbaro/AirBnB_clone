@@ -5,7 +5,7 @@ from models.base_model import BaseModel
 
 class User(BaseModel):
     """
-    Class User is a subclass of the BaseModel class with the public class attributes
+    Class User is a subclass of the BaseModel
         a. email: string - empty string
         b. password: string - empty string
         c. first_name: string - empty string
