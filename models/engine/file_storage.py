@@ -14,23 +14,32 @@ from models.review import Review
 
 
 class FileStorage:
-    pass
+    """
+    Class for serialization and deserialization
+    of instances to JSON
+    """
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """Creates & returns dictionary __objects"""
-        pass
+        return FileStorage.__objects
 
     def new(self, obj):
         """Stores the object obj with the key <obj class name>.id
         in the __objects dictionary
         """
-        pass
+        self.__objects["{}.{}".format(type(obj).__name__, obj.id)] = obj
 
     def save(self):
         """ Converts the __objects dictionary
         to JSON and saves it to a file.
         """
-        pass
+        dictionary = {}
+        for key, value in self.__objects.items():
+            dictionary[key] = value.to_dict()
+        with open(self.__file_path, "w", encoding="utf-8") as f:
+            json.dump(dictionary, f)
 
     def reload(self):
         """
@@ -38,4 +47,11 @@ class FileStorage:
         it to a Python dictionary.
         If the file does not exist, do nothing
         """
-        pass
+        try:
+            with open(self.__file_path, "r", encoding="utf-8") as f:
+                for o in json.load(f).values():
+                    name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(name)(**o))
+        except FileNotFoundError:
+            pass
