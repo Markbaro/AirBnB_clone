@@ -77,6 +77,28 @@ class HBNBCommand(cmd.Cmd):
             all_instances = [str(obj) for obj in arg_list.values()]
             print(all_instances)
 
+    def do_show(self, line):
+        """Show details of a specific instance."""
+        args = line.split()
+        if not args:
+            print("** class name missing **")
+            return
+        if args[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+
+        allobjects = storage.all()
+        key = f"{args[0]}.{args[1]}"
+        found = allobjects.get(key, None)
+
+        if found:
+            print(found)
+        else:
+            print("** no instance found **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
