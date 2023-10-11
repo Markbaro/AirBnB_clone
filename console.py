@@ -1,9 +1,17 @@
 #!/usr/bin/python3
+"""The module contains the HBNBCommand class"""
+
+
 import cmd
-"""
-Module  that contains the entry point of the python
-command interpreter
-"""
+import ast
+from models import storage
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -12,6 +20,16 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
+
+    classes = {
+        "BaseModel",
+        "User",
+        "State",
+        "City",
+        "Place",
+        "Amenity",
+        "Review"
+    }
 
     def do_quit(self, arg):
         """
@@ -28,8 +46,36 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        """does nothing when empty line is entered"""
+        """Do nothing upon receiving an empty line."""
         pass
+
+    def do_create(self, arg):
+        """Create an object from the specified class."""
+        if not arg:
+            print("** class name missing **")
+        elif arg not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+        else:
+            new_instance = eval(arg)()
+            new_instance.save()
+            print(new_instance.id)
+
+    def do_all(self, line):
+        """List all instances or instances of a specific class."""
+        arg_list = storage.all()
+        args = line.split()
+
+        if args:
+            class_name = args[0]
+            if class_name not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+            else:
+                new_instances = [str(obj) for key, obj in arg_list.items()
+                                 if key.startswith(class_name + ".")]
+                print(new_instances)
+        else:
+            all_instances = [str(obj) for obj in arg_list.values()]
+            print(all_instances)
 
 
 if __name__ == '__main__':
