@@ -118,6 +118,62 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
+    def do_count(self, arg):
+        """Retrieve the number of instances of a class."""
+        args = arg.split()
+        if not args:
+            print("** class name missing **")
+            return
+        if args[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+
+        class_name = args[0]
+        count = sum(1 for key in storage.all()
+                    if key.startswith(class_name + "."))
+        print(count)
+
+    def do_update(self, arg):
+        """
+        Update an instance based on class name,
+        ID, attribute name, and value.
+        """
+        args = arg.split()
+
+        if not args:
+            print('** class name missing **')
+            return
+        class_name = args[0]
+
+        if class_name not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        instance_id = args[1]
+
+        if len(args) < 3:
+            print("** attribute name missing **")
+            return
+        attr_name = args[2]
+
+        if len(args) < 4:
+            print("** value missing **")
+            return
+        attr_value = args[3]
+
+        key = f"{class_name}.{instance_id}"
+        all_objects = storage.all()
+
+        if key in all_objects:
+            instance = all_objects[key]
+            setattr(instance, attr_name, attr_value)
+            instance.save()
+        else:
+            print('** no instance found **')
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
