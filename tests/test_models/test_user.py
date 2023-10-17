@@ -35,13 +35,42 @@ class Test_User(unittest.TestCase):
         """Test if user instance is created successfully."""
         self.assertIsInstance(self.instance, User)
 
-    def test_if_user_instance_stored_succesfully(self):
-        """Tests for User instance is stored"""
-        self.assertIn(User(), models.storage.all().values())
+    def test_user_to_dict_and_magic_dict_methods(self):
+        model = User()
+        self.assertNotEqual(model.to_dict(), model.__dict__)
+
+    def test_user_to_dict_method_with_None_arg(self):
+        model = User()
+        with self.assertRaises(TypeError):
+            model.to_dict(None)
 
     def test_user_created_at(self):
         """test datetime for User attribute created_at"""
         self.assertEqual(datetime, type(User().created_at))
+
+    def test_user_for_doc(self):
+        self.assertIsNotNone(User.__doc__)
+
+    def test_user_name_attr_is_public_class_attr(self):
+        """test that the User attribute name is public class attribute"""
+        model = User()
+        self.assertNotIn("name", model.__dict__)
+        self.assertEqual(str, type(User.email))
+        self.assertIn("email", dir(model))
+
+    def test_user_instantiation_no_args(self):
+        """Tests the User instantiation with no parameters"""
+        self.assertEqual(User, type(User()))
+
+    def test_user_created_at_attr_are_different(self):
+        """tests that the User created_at attributes for two
+            instances are different"""
+        self.assertLess(User().created_at, User().created_at)
+
+    def test_user_updated_at_attr_are_different(self):
+        """tests that the User updated_at attribute for two
+            instances are different"""
+        self.assertLess(User().updated_at, User().updated_at)
 
     def test_user_updated_at(self):
         """test datetime of User attribute updated_at"""

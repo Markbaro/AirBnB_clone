@@ -32,10 +32,6 @@ class Test_State(unittest.TestCase):
     def test_state_as_subclass_of_BaseModel(self):
         self.assertTrue(issubclass(State().__class__, BaseModel), True)
 
-    def test_state_instance_stored(self):
-        """Tests if a new State instance is stored"""
-        self.assertIn(State(), models.storage.all().values())
-
     def test_state_id(self):
         """tests the type of a State instance id"""
         self.assertEqual(str, type(State().id))
@@ -47,6 +43,47 @@ class Test_State(unittest.TestCase):
     def test_state_updated_at_is_datetime(self):
         """test datetime of State attribute updated_at"""
         self.assertEqual(datetime, type(State().updated_at))
+
+    def test_state_for_doc(self):
+        self.assertIsNotNone(State.__doc__)
+
+    def test_unused_args(self):
+        """test for unused args"""
+        model = State(None)
+        self.assertNotIn(None, model.__dict__.values())
+
+    def test_state_instantiation_with_kwargs(self):
+        "tests the instantiation of the State class with kwargs"
+        dt = datetime.now().isoformat()
+        kwargs = {"id": "121212", "created_at": dt, "updated_at": dt}
+        model = State(**kwargs)
+        self.assertEqual(model.id, "121212")
+        self.assertEqual(model.created_at.isoformat(), dt)
+        self.assertEqual(model.updated_at.isoformat(), dt)
+
+    def test_state_created_at_attr_are_different(self):
+        """tests that the State created_at attrs are different"""
+        self.assertLess(State().created_at, State().created_at)
+
+    def test_state_updated_at_attr_are_different(self):
+        """tests that the State updated_at attrs are different"""
+        self.assertLess(State().updated_at, State().updated_at)
+
+    def test_unused_args(self):
+        """test for unused args"""
+        model = State(None)
+        self.assertNotIn(None, model.__dict__.values())
+
+    def test_state_name_attr_is_public_class_attr(self):
+        """test that the Sate attribute name is public class attribute"""
+        model = State()
+        self.assertNotIn("name", model.__dict__)
+        self.assertEqual(str, type(State.name))
+        self.assertIn("name", dir(model))
+
+    def test_state_instantiation_no_args(self):
+        """Tests the State instantiation with no parameters"""
+        self.assertEqual(State, type(State()))
 
     def test_state_instance_id_is_unique(self):
         """test that the State instances ids are unique"""

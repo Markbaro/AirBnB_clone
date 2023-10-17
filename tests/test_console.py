@@ -13,6 +13,12 @@ from console import HBNBCommand
 class TestHBNBCommand(unittest.TestCase):
     """Unittest for the HBNBCommand class"""
 
+    missing_class = "** class name missing **"
+    invalid_class = "** class doesn't exist **"
+    unknown_syntax = "*** Unknown syntax: {}"
+    missing_id = "** instance id missing **"
+    missing_instance = "** no instance found **"
+
     def test_console_prompt(self):
         """test for the command line prompt"""
         self.assertEqual("(hbnb) ", HBNBCommand.prompt)
@@ -67,7 +73,67 @@ class TestHBNBCommand(unittest.TestCase):
         except IOError:
             pass
 
+    def test_console_create_cmd_with_missing_class(self):
+        """tests the console create command with missing class name"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create"))
+            self.assertEqual(
+                TestHBNBCommand.missing_class,
+                f.getvalue().strip()
+            )
 
+    def test_console_create_cmd_for_BaseModel_class(self):
+        """tests the create cmd for the BaseModel class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create BaseModel"))
+            self.assertLess(0, len(f.getvalue().strip()))
+            key_id = f'BaseModel.{f.getvalue().strip()}'
+            self.assertIn(key_id, storage.all().keys())
 
+    def test_console_create_cmd_for_user_class(self):
+        """tests the create cmd for the User class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create User"))
+            self.assertLess(0, len(f.getvalue().strip()))
+            key_id = f'User.{f.getvalue().strip()}'
+            self.assertIn(key_id, storage.all().keys())
 
+    def test_console_create_cmd_for_State_class(self):
+        """tests the create cmd for the State class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create State"))
+            self.assertLess(0, len(f.getvalue().strip()))
+            key_id = f'State.{f.getvalue().strip()}'
+            self.assertIn(key_id, storage.all().keys())
 
+    def test_console_create_cmd_for_City_class(self):
+        """tests the create cmd for the City class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create City"))
+            self.assertLess(0, len(f.getvalue().strip()))
+            key_id = f'City.{f.getvalue().strip()}'
+            self.assertIn(key_id, storage.all().keys())
+
+    def test_console_create_cmd_for_Amenity_class(self):
+        """tests the create cmd for the Amenity class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create Amenity"))
+            self.assertLess(0, len(f.getvalue().strip()))
+            key_id = f'Amenity.{f.getvalue().strip()}'
+            self.assertIn(key_id, storage.all().keys())
+
+    def test_console_create_cmd_for_Place_class(self):
+        """tests the create cmd for the Place class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create Place"))
+            self.assertLess(0, len(f.getvalue().strip()))
+            key_id = f'Place.{f.getvalue().strip()}'
+            self.assertIn(key_id, storage.all().keys())
+
+    def test_console_create_cmd_for_Review_class(self):
+        """tests the create cmd for the Review class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create Review"))
+            self.assertLess(0, len(f.getvalue().strip()))
+            key_id = f'Review.{f.getvalue().strip()}'
+            self.assertIn(key_id, storage.all().keys())
