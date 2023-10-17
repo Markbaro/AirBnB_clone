@@ -35,14 +35,12 @@ class HBNBCommand(cmd.Cmd):
         """
         Quit the command interpreter.
         """
-        print("Goodbye!")
         return True
 
     def do_EOF(self, arg):
         """
         Quit the command interpreter on EOF.
         """
-        print("exiting")
         return True
 
     def emptyline(self):
