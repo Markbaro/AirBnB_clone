@@ -35,18 +35,6 @@ class Test_File_Storage(unittest.TestCase):
         instance.new(obj)
         self.assertIn("BaseModel." + obj.id, instance._FileStorage__objects)
 
-    """def test_save_method(self):
-        m = mock_open()
-        instance = FileStorage()
-        obj = BaseModel()
-        #obj.save = lambda: None
-        instance.new(obj)
-        with patch('builtins.open', m):
-            instance.save()
-            m.assert_called_once_with(instance._FileStorage__file_path,
-            'w', encoding='utf-8')
-            m().write.assert_called_once()"""
-
     def test_reload_method(self):
         instance = FileStorage()
         obj = BaseModel()
@@ -56,8 +44,6 @@ class Test_File_Storage(unittest.TestCase):
             mock_open(read_data=json.dumps({"BaseModel." + obj.id: obj_dict})),
         ) as m:
             instance.reload()
-            m.assert_called_once_with(
-                instance._FileStorage__file_path, "r", encoding="utf-8"
-            )
+            m.assert_called_once_with(instance._FileStorage__file_path, "r")
             self.assertIn("BaseModel." + obj.id,
                           instance._FileStorage__objects)
