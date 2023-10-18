@@ -236,3 +236,292 @@ class TestHBNBCommand(unittest.TestCase):
             cmd = f"show Review {key_id}"
             self.assertFalse(HBNBCommand().onecmd(cmd))
             self.assertEqual(found.__str__(), f.getvalue().strip())
+
+    def test_console_show_cmd_for_BaseModel_class_with_missing_id(self):
+        """tests the show cmd for the BaseModel class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show BaseModel"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_show_cmd_for_User_class_with_missing_id(self):
+        """tests the show cmd for the BaseModel class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show User"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_show_cmd_for_State_class_with_missing_id(self):
+        """tests the show cmd for the State class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show State"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_show_cmd_for_City_class_with_missing_id(self):
+        """tests the show cmd for the City class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show City"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_show_cmd_for_Amenity_class_with_missing_id(self):
+        """tests the show cmd for the Amenity class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show Amenity"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_show_cmd_for_Place_class_with_missing_id(self):
+        """tests the show cmd for the Place class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show Place"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_show_cmd_for_Review_class_with_missing_id(self):
+        """tests the show cmd for the Review class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show Review"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_show_cmd_for_BaseModel_class_with_invalid_id(self):
+        """tests the show cmd for the BaseModel class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show BaseModel 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_show_cmd_for_User_class_with_invalid_id(self):
+        """tests the show cmd for the User class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show User 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_show_cmd_for_State_class_with_invalid_id(self):
+        """tests the show cmd for the State class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show State 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_show_cmd_for_City_class_with_invalid_id(self):
+        """tests the show cmd for the City class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show City 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_show_cmd_for_Amenity_class_with_invalid_id(self):
+        """tests the show cmd for the Amenity class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show Amenity 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_show_cmd_for_Place_class_with_invalid_id(self):
+        """tests the show cmd for the Place class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show Place 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_show_cmd_for_Review_class_with_invalid_id(self):
+        """tests the show cmd for the Review class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("show Review 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_destroy_cmd_for_BaseModel_class_with_missing_id(self):
+        """tests the show desroy for the BaseModel class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy BaseModel"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_destroy_cmd_for_User_class_with_missing_id(self):
+        """tests the destroy cmd for the BaseModel class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy User"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_destroy_cmd_for_State_class_with_missing_id(self):
+        """tests the destroy cmd for the State class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy State"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_destroy_cmd_for_City_class_with_missing_id(self):
+        """tests the destroy cmd for the City class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy City"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_destroy_cmd_for_Amenity_class_with_missing_id(self):
+        """tests the destroy cmd for the Amenity class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy Amenity"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_destroy_cmd_for_Place_class_with_missing_id(self):
+        """tests the destroy cmd for the Place class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy Place"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_destoy_cmd_for_Review_class_with_missing_id(self):
+        """tests the destoy cmd for the Review class with missing id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy Review"))
+            self.assertEqual(TestHBNBCommand.missing_id, f.getvalue().strip())
+
+    def test_console_destroy_cmd_for_BaseModel_class_with_invalid_id(self):
+        """tests the destroy cmd for the BaseModel class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(
+                HBNBCommand().onecmd("destroy BaseModel 12121212")
+            )
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_destroy_cmd_for_User_class_with_invalid_id(self):
+        """tests the destroy cmd for the User class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy User 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_destroy_cmd_for_State_class_with_invalid_id(self):
+        """tests the destroy cmd for the State class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy State 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_destroy_cmd_for_City_class_with_invalid_id(self):
+        """tests the destroy cmd for the City class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy City 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_destroy_cmd_for_Amenity_class_with_invalid_id(self):
+        """tests the destroy cmd for the Amenity class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy Amenity 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_destroy_cmd_for_Place_class_with_invalid_id(self):
+        """tests the destroy cmd for the Place class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy Place 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_destroy_cmd_for_Review_class_with_invalid_id(self):
+        """tests the destroy cmd for the Review class with invalid id"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("destroy Review 12121212"))
+            self.assertEqual(
+                TestHBNBCommand.missing_instance,
+                f.getvalue().strip()
+            )
+
+    def test_console_destroy_cmd_for_BaseModel_class(self):
+        """tests the destroy cmd for the BaseModel class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create BaseModel"))
+            key_id = f.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as f:
+            found = storage.all()[f'BaseModel.{key_id}']
+            cmd = f"destroy BaseModel {key_id}"
+            self.assertFalse(HBNBCommand().onecmd(cmd))
+            self.assertNotIn(found, storage.all())
+
+    def test_console_show_cmd_for_User_class(self):
+        """tests the show cmd for the User class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create User"))
+            key_id = f.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as f:
+            found = storage.all()[f'User.{key_id}']
+            cmd = f"show User {key_id}"
+            self.assertFalse(HBNBCommand().onecmd(cmd))
+            self.assertEqual(found.__str__(), f.getvalue().strip())
+
+    def test_console_show_cmd_for_State_class(self):
+        """tests the show cmd for the State class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create State"))
+            key_id = f.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as f:
+            found = storage.all()[f'State.{key_id}']
+            cmd = f"show State {key_id}"
+            self.assertFalse(HBNBCommand().onecmd(cmd))
+            self.assertEqual(found.__str__(), f.getvalue().strip())
+
+    def test_console_show_cmd_for_City_class(self):
+        """tests the show cmd for the City class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create City"))
+            key_id = f.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as f:
+            found = storage.all()[f'City.{key_id}']
+            cmd = f"show City {key_id}"
+            self.assertFalse(HBNBCommand().onecmd(cmd))
+            self.assertEqual(found.__str__(), f.getvalue().strip())
+
+    def test_console_show_cmd_for_Amenity_class(self):
+        """tests the show cmd for the Amenity class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create Amenity"))
+            key_id = f.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as f:
+            found = storage.all()[f'Amenity.{key_id}']
+            cmd = f"show Amenity {key_id}"
+            self.assertFalse(HBNBCommand().onecmd(cmd))
+            self.assertEqual(found.__str__(), f.getvalue().strip())
+
+    def test_console_show_cmd_for_Place_class(self):
+        """tests the show cmd for the Place class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create Place"))
+            key_id = f.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as f:
+            found = storage.all()[f'Place.{key_id}']
+            cmd = f"show Place {key_id}"
+            self.assertFalse(HBNBCommand().onecmd(cmd))
+            self.assertEqual(found.__str__(), f.getvalue().strip())
+
+    def test_console_show_cmd_for_Review_class(self):
+        """tests the show cmd for the Review class"""
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create Review"))
+            key_id = f.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as f:
+            found = storage.all()[f'Review.{key_id}']
+            cmd = f"show Review {key_id}"
+            self.assertFalse(HBNBCommand().onecmd(cmd))
+            self.assertEqual(found.__str__(), f.getvalue().strip())
