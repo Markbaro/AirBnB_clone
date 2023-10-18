@@ -29,16 +29,18 @@ class FileStorage:
         """Stores the object obj with the key <obj class name>.id
         in the __objects dictionary
         """
-        key = obj.__class__.__name__ + "." + obj.id
-        FileStorage.__objects[key] = obj
+        key = "{}.{}".format(type(obj).__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
         """ Converts the __objects dictionary
         to JSON and saves it to a file.
         """
-        dump = {k: val.to_dict() for k, val in FileStorage.__objects.items()}
-        with open(FileStorage.__file_path, "w") as f:
-            f.write(json.dumps(dump))
+        dictionary = {}
+        for key, value in self.__objects.items():
+            dictionary[key] = value.to_dict()
+        with open(self.__file_path, "w", encoding="utf-8") as f:
+            json.dump(dictionary, f)
 
     def reload(self):
         """
@@ -46,11 +48,11 @@ class FileStorage:
         it to a Python dictionary.
         If the file does not exist, do nothing
         """
-        if os.path.isfile(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r") as f:
-                payload = f.read()
-            paydict = json.loads(payload)
-            for key, val in paydict.items():
-                classname, obj_id = key.split(".")
-                cls = eval(classname)
-                FileStorage.__objects[key] = cls(**val)
+        try:
+            with open(self.__file_path, "r", encoding="utf-8") as f:
+                for o in json.load(f).values():
+                    name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(name)(**o))
+        except FileNotFoundError:
+            pass
