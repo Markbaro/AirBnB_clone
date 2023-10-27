@@ -1,25 +1,28 @@
-.filters{
-    position: relative;
-    background-color: white;
+.filters {
+    background-color: #fff;
     height: 70px;
     width: 100%;
-    border: 1px solid #DDDDDD;
+    border: 1px solid #ddd;
     border-radius: 4px;
+    position: relative;
 }
-
-.button {
-    position: absolute;
+.filters button {
     font-size: 18px;
-    background: #FF5A5F;
-    color: #FFFFFF;
+    background-color: #ff5a5f;
+    color: #fff;
+
     height: 48px;
     width: 20%;
-    border-style: none;
-    border-radius: 4px;
-    top: 15%;
-    right: 30px;
-}
 
-.button:hover {
+    border: none;
+    border-radius: 4px;
+
+    position: absolute;
+    right: 0;
+
+    margin-top: 12px;
+    margin-right: 30px;
+}
+.filters button:hover {
     opacity: 0.9;
 }
